@@ -7,24 +7,24 @@ on:
   pull_request:
     branches: [master, main]
     types: [opened, synchronize]
-
 jobs:
   deployment_pipeline:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint --fix
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v4
-        with:
-          build: npm run build
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+      if: github.event_name == 'push'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: "16"
+        - name: npm install
+          run: npm install
+        - name: lint
+          run: npm run eslint --fix
+        - name: test
+          run: npm run test
+        - name: e2e tests
+          uses: cypress-io/github-action@v4
+          with:
+            build: npm run build
+            start: npm run start-prod
+            wait-on: http://localhost:5000
