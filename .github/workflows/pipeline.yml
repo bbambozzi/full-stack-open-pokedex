@@ -10,6 +10,7 @@ on:
 
 jobs:
   deployment_pipeline:
+    if: ${{github_event_name == 'push'}} ## only on deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
