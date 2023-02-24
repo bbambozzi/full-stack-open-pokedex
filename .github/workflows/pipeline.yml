@@ -28,7 +28,6 @@ jobs:
             build: npm run build
             start: npm run start-prod
             wait-on: http://localhost:5000
-
   tag_release:
     needs: [deployment_pipeline]
     if: "!contains(github.event.head_commit.message, '#skip')"
