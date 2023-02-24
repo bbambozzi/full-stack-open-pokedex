@@ -56,7 +56,7 @@ jobs:
         with:
             severity: error
             details: Test failed, last commit by ${{github.event.pull_request.head_commit.author}}
-            webhookUrl: ${{FSO_DISCORD_WEBHOOK}}
+            webhookUrl: ${{secrets.FSO_DISCORD_WEBHOOK}}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
